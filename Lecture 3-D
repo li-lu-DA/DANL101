@@ -1,0 +1,17 @@
+# Guess Age Game in R
+
+# Introduction message
+cat("Welcome to the Guess Your Age game!\n")
+cat("Please follow the instructions carefully and enter your result when prompted.\n\n")
+
+# Step 1: Ask the user to follow the steps
+step_1 <- as.numeric(readline(prompt = "Let's start!
+1. Multiply the first digit of your age by 5.
+2. Add 4 to the result.
+3. Multiply that by 2.
+4. Now, add the second digit of your age to the result.
+Enter the final number here: "))
+
+# Step 2: Calculate the guessed age
+age_guess <- step_1 - 8 # Subtracting 8 gives the exact age
+cat("\nI have guessed your age! You are", age_guess, "years old!\n")
