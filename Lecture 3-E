@@ -13,8 +13,9 @@ library(ggplot2)
 url <- "https://raw.githubusercontent.com/li-lu-DA/DANL101/refs/heads/main/MSFT103424.csv"
 data <- read.csv(url)
 
-# Convert the 'Date' column to Date type with the correct format
+# Convert the 'Date'/'Volume' column to Date type with the correct format
 data$Date <- as.Date(data$Date, format = "%d-%b-%y")
+data$Volume <- as.numeric(gsub(",", "", data$Volume))
 
 # Plot the data using ggplot2
 ggplot(data, aes(x = Date, y = Adj.Close)) +
