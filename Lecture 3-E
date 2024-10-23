@@ -1,0 +1,25 @@
+#### DANL 101 - 3E (Create a similar line graph as in Excel)
+
+# Install ggplot2 if it is not already installed
+if(!require(ggplot2)) {
+  install.packages("ggplot2")
+}
+
+
+# Load necessary libraries
+library(ggplot2)
+
+# Load the data from the URL
+url <- "https://raw.githubusercontent.com/li-lu-DA/DANL101/refs/heads/main/MSFT103424.csv"
+data <- read.csv(url)
+
+# Convert the 'Date' column to Date type with the correct format
+data$Date <- as.Date(data$Date, format = "%d-%b-%y")
+
+# Plot the data using ggplot2
+ggplot(data, aes(x = Date, y = Adj.Close)) +
+  geom_line(color = "blue") +
+  labs(title = "Microsoft Stock Prices", 
+       x = "Date", 
+       y = "Closing Price (USD)") +
+  theme_minimal()
