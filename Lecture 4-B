@@ -1,0 +1,40 @@
+# Sample dataset with duplicate rows
+data <- data.frame(
+  ID = c(1, 2, 3, 3, 4, 5, 5),
+  Name = c("Alice", "Bob", "Carol", "Carol", "Dave", "Eve", "Eve"),
+  Age = c(25, 30, 22, 22, 35, 28, 28)
+)
+print(data)
+
+
+# First approach by using unique() function from base R package
+# Remove duplicates using unique()
+data_no_duplicates_unique <- unique(data)
+print(data_no_duplicates_unique)
+
+# Second approach by using distinct() function from dplyr package
+# Install package first
+if(!require(dplyr)) {
+  install.packages("dplyr")
+}
+# Library package second
+library(dplyr)
+# Remove duplicates based on all columns
+data_no_duplicates_dplyr <- distinct(data)
+print(data_no_duplicates_dplyr)
+
+
+# Third approach by removing duplicate rows
+# Remove specific duplicate rows by row index
+data_no_duplicates_row <- data[-c(4, 7), ]
+print(data_no_duplicates_row)
+
+
+## Apply above three method with below data_ex for practice
+# Sample dataset with duplicate rows
+data_ex <- data.frame(
+  ID = c(1, 1, 2, 3, 4, 4, 5),
+  Name = c("Alice", "Alice", "Bob", "Carol", "Dave", "Dave", "Eve"),
+  Age = c(25, 25, 30, 22, 35, 35, 28)
+)
+print(data_ex)
