@@ -1,0 +1,68 @@
+##### Install packages if Rstudio don't have
+if(!require(ggplot2)) {install.packages("ggplot2")}
+if(!require(dplyr)) {install.packages("dplyr")}
+
+
+##### Load package
+library(ggplot2)
+library(dplyr)
+
+
+##### Create a sample dataset for our basic charts
+data <- data.frame(
+  Quarter = rep(c("Q1", "Q2", "Q3", "Q4"), times = 10),
+  Time = rep(1:10, each = 4),
+  Sales = c(3, 5, 15, 4, 4, 6, 18, 5, 3, 4, 20, 5, 2, 5, 17, 4, 
+            4, 5, 19, 4, 3, 5, 16, 5, 3, 4, 21, 4, 4, 6, 18, 5,
+            2, 6, 22, 4, 4, 5, 20, 4)
+)
+
+##### 1. Bar Chart: Shows Categorical Comparisons
+
+# Create a summary of sales by category (Data Preparation)
+bar_data <- data %>%
+  group_by(Quarter) %>%
+  summarise(Total_Sales = sum(Sales))
+
+# Plot
+ggplot(bar_data, aes(x = Quarter, y = Total_Sales, fill = Quarter)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Bar Chart: Quarter Comparisons", x = "Quarter", y = "Total_Sales") +
+  theme_minimal()
+
+
+##### 2. Line Chart: Tracks Trends Over Time
+
+# Plot
+ggplot(data, aes(x = Time, y = Sales, color = Quarter)) +
+  geom_line(aes(group = Quarter)) +
+  geom_point() +
+  labs(title = "Line Chart: Trends Over Time", x = "Time", y = "Sales") +
+  theme_minimal()
+
+
+##### 3. Pie Chart: Displays Parts of a Whole
+
+# Summarize Sales by Quarter for the pie chart (Data Preparation)
+pie_data <- data %>%
+  group_by(Quarter) %>%
+  summarise(Total_Sales = sum(Sales)) %>%
+  mutate(Proportion = round(Total_Sales / sum(Total_Sales) * 100, 1)) # Calculate proportions
+
+# Plot Pie Chart
+ggplot(pie_data, aes(x = "", y = Total_Sales, fill = Quarter)) +
+  geom_bar(width = 1, stat = "identity") +
+  coord_polar("y") +
+  geom_text(aes(label = paste0(Proportion, "%")), position = position_stack(vjust = 0.5)) +
+  labs(title = "Pie Chart: Parts of a Whole (Quarterly Sales)") +
+  theme_void()
+
+
+
+##### 4. Histogram: Visualizes the Distribution of a Variable
+
+# Plot
+ggplot(data, aes(x = Sales)) +
+  geom_histogram(bins = 10, fill = "lightblue", color = "black") +
+  labs(title = "Histogram: Distribution of a Sales", x = "Sales", y = "Frequency") +
+  theme_minimal()
