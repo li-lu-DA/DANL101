@@ -1,0 +1,85 @@
+
+
+# Load required library
+library(ggplot2)
+library(reshape2)
+
+# Set random seed for reproducibility
+set.seed(123)
+
+# 1. Generate Data and Create a Box Plot
+box_data <- data.frame(
+  Category = rep(c("A", "B", "C", "D"), each = 20),
+  Value = c(rnorm(20, mean = 5, sd = 1),
+            rnorm(20, mean = 6, sd = 1.5),
+            rnorm(20, mean = 7, sd = 2),
+            rnorm(20, mean = 8, sd = 0.5))
+)
+
+box_plot <- ggplot(box_data, aes(x = Category, y = Value, fill = Category)) +
+  geom_boxplot() +
+  labs(title = "Box Plot", x = "Category", y = "Value") +
+  theme_minimal()
+print(box_plot)
+
+# 2. Generate Data and Create a Scatter Plot
+scatter_data <- data.frame(
+  X = rnorm(100, mean = 5, sd = 2),
+  Y = rnorm(100, mean = 3, sd = 1.5),
+  Group = sample(c("Group 1", "Group 2"), 100, replace = TRUE)
+)
+
+scatter_plot <- ggplot(scatter_data, aes(x = X, y = Y, color = Group)) +
+  geom_point(size = 2) +
+  labs(title = "Scatter Plot", x = "X Value", y = "Y Value") +
+  theme_minimal()
+print(scatter_plot)
+
+# 3. Generate Data and Create a Density Plot
+density_data <- data.frame(
+  Value = c(rnorm(100, mean = 5, sd = 1),
+            rnorm(100, mean = 6, sd = 1.5)),
+  Group = rep(c("Group 1", "Group 2"), each = 100)
+)
+
+density_plot <- ggplot(density_data, aes(x = Value, fill = Group)) +
+  geom_density(alpha = 0.7) +
+  labs(title = "Density Plot", x = "Value", y = "Density") +
+  theme_minimal()
+print(density_plot)
+
+# 4. Generate Data and Create a Heatmap
+heatmap_data <- matrix(runif(16, min = 0, max = 1), nrow = 4)
+rownames(heatmap_data) <- paste("Row", 1:4, sep = "")
+colnames(heatmap_data) <- paste("Col", 1:4, sep = "")
+heatmap_melt <- melt(heatmap_data)
+
+heatmap_plot <- ggplot(heatmap_melt, aes(x = Var2, y = Var1, fill = value)) +
+  geom_tile() +
+  scale_fill_gradient(low = "blue", high = "red") +
+  labs(title = "Heatmap", x = "Column", y = "Row", fill = "Value") +
+  theme_minimal()
+print(heatmap_plot)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
