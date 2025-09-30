@@ -10,7 +10,7 @@ if(!require(ggplot2)) {
 library(ggplot2)
 
 # Load the data from the URL
-url <- "https://raw.githubusercontent.com/li-lu-DA/DANL101/refs/heads/main/MSFT103424.csv"
+url <- "https://raw.githubusercontent.com/li-lu-DA/DANL101/refs/heads/main/ORCL091925.csv"
 data <- read.csv(url)
 
 # Convert the 'Date'/'Volume' column to Date type with the correct format
@@ -20,7 +20,7 @@ data$Volume <- as.numeric(gsub(",", "", data$Volume))
 # Plot the data using ggplot2
 ggplot(data, aes(x = Date, y = Adj.Close)) +
   geom_line(color = "blue") +
-  labs(title = "Microsoft Stock Prices", 
+  labs(title = "Oracle Stock Prices", 
        x = "Date", 
        y = "Closing Price (USD)") +
   theme_minimal()
