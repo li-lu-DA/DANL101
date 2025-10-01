@@ -18,7 +18,7 @@ data$Date <- as.Date(data$Date, format = "%d-%b-%y")
 data$Volume <- as.numeric(gsub(",", "", data$Volume))
 
 # Plot the data using ggplot2
-ggplot(data, aes(x = Date, y = Adj.Close)) +
+ggplot(data, aes(x = Date, y = Adj.Close.)) +
   geom_line(color = "blue") +
   labs(title = "Oracle Stock Prices", 
        x = "Date", 
