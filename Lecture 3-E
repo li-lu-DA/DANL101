@@ -1,10 +1,8 @@
 #### DANL 101 - 3E (Create a similar line graph as in Excel)
 
-# Install ggplot2 if it is not already installed
-if(!require(ggplot2)) {
-  install.packages("ggplot2")
-}
-
+# Install ggplot2
+options(repos = c(RSPM = "https://packagemanager.posit.co/cran/latest"))
+install.packages("ggplot2")
 
 # Load necessary libraries
 library(ggplot2)
