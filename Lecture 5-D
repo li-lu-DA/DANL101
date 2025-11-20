@@ -28,7 +28,7 @@ boxplot
 # What above plot produces:
   # A. Q1, median, Q3
   # B. whiskers (IQR, interquartile range, IQR = Q3-Q1)
-      ## high whisker: biggest value that smaller than Q1 + 1.5 * IQR
+      ## high whisker: biggest value that smaller than Q3 + 1.5 * IQR
       ## low whisker: smallest value that greater than Q1 - 1.5 * IQR
   # C. outliers
 
