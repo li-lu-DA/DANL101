@@ -1,0 +1,158 @@
+# ============================================================
+# DANL 101 — Boxplots and Financial Data Visualization Lab
+# ============================================================
+
+# Library the ggplot2 package
+library(ggplot2)
+
+# Real dataset from Oracle company at Yahoo Finance
+# Load the data from the URL
+set.seed(123)
+url <- "https://raw.githubusercontent.com/li-lu-DA/DANL101/refs/heads/main/ORCL091925.csv"
+data <- read.csv(url)
+
+# Convert the 'Date'/'Volume' column to Date type with the correct format
+data$Date <- as.Date(data$Date, format = "%d-%b-%y")
+data$Volume <- as.numeric(gsub(",", "", data$Volume))
+
+# 1) Basic ggplot boxplot
+boxplot <- ggplot(data, aes(x = "", y = Adj.Close.)) +
+  geom_boxplot(fill = "lightblue", color = "darkblue", width = 0.4) +
+  labs(title = "Boxplot of price",
+       x = "",
+       y = "Adjusted close price") +
+  theme_minimal()
+
+boxplot
+
+# What above plot produces:
+  # A. Q1, median, Q3
+  # B. whiskers (IQR, interquartile range, IQR = Q3-Q1)
+      ## high whisker: biggest value that smaller than Q1 + 1.5 * IQR
+      ## low whisker: smallest value that greater than Q1 - 1.5 * IQR
+  # C. outliers
+
+
+# Practice Exercise 1
+
+# Try change the color with "purple" and "skyblue", rebuild the plot
+# And write your code below
+
+
+# 2) Comparsion ggplot boxplots
+
+boxplot_cp <- ggplot() +
+  geom_boxplot(
+    data = data.frame(
+      Price = data$Close.,
+      Type  = "Close"
+    ),
+    aes(x = Type, y = Price),
+    fill = "lightblue", color = "darkblue"
+  ) +
+  geom_boxplot(
+    data = data.frame(
+      Price = data$Adj.Close.,
+      Type  = "Adj Close"
+    ),
+    aes(x = Type, y = Price),
+    fill = "lightgreen", color = "darkgreen"
+  ) +
+  labs(
+    title = "Comparison of Close vs Adjusted Close Prices",
+    x = "",
+    y = "Price"
+  ) +
+  theme_minimal()
+
+boxplot_cp
+
+
+# Practice Exercise 2
+
+# Try compare the low and high price, rebuild the plot
+# And write your code below
+
+
+
+
+# 3) ggplot boxplot with mean
+boxplot_avg <- ggplot(data, aes(x = "", y = Adj.Close.)) +
+  geom_boxplot(fill = "lightblue", color = "darkblue", width = 0.4) +
+  stat_summary(fun = mean, geom = "point", color = "red", size = 3) +
+  labs(title = "Boxplot of price",
+       x = "",
+       y = "Adjusted close price") +
+  theme_minimal()
+
+boxplot_avg
+
+
+# Practice Exercise 3
+# Plot the open price boxplot and add mean point into this box as well
+# And write your code below
+
+
+# Practice Exercise 4
+# based on Exercise 3 plot, change the boxplot orientation
+# Hint:
+# + coord_flip()
+# And write your code below
+
+
+
+# 4) ggplot boxplot Compare Two Time Periods
+data$Period <- ifelse(data$Date < "2025-01-01", "Past", "Recent")
+
+boxplot_tp <- ggplot(data, aes(x = Period, y = Adj.Close.)) +
+  geom_boxplot(fill = "lightblue", color = "darkblue", width = 0.4) +
+  labs(title = "Boxplot of price",
+       x = "",
+       y = "Adjusted close price") +
+  theme_minimal()
+
+boxplot_tp
+
+# Practice Exercise 5
+# compare same time periods setting on open price
+# And write your code below
+
+
+
+
+# ============================================================
+# 📝 CLASS TAKEAWAY — Boxplots & BASIC DATA UNDERSTANDING
+# ============================================================
+
+# • Boxplots show the distribution of a numeric variable using:
+#     - Q1 (25th percentile)
+#     - Median (50th percentile)
+#     - Q3 (75th percentile)
+#     - Whiskers (non-outlier min/max)
+#     - Outliers (values outside 1.5 × IQR)
+
+# • Whiskers do NOT always reach the min/max.
+#     - Upper whisker = max value ≤ Q3 + 1.5 × IQR
+#     - Lower whisker = min value ≥ Q1 − 1.5 × IQR
+
+# • ggplot2 allows easy customization:
+#     - Change colors
+#     - Add mean points
+#     - Flip orientation with coord_flip()
+#     - Compare variables (Close vs Adj Close, High vs Low)
+
+# • Boxplots help us quickly compare financial data:
+#     - Detect volatility
+#     - Spot unusual price movements (outliers)
+#     - Compare past vs recent periods
+
+# • By now you should be able to:
+#     - Build a boxplot using ggplot()
+#     - Interpret IQR, whiskers, and outliers
+#     - Create comparison boxplots for different price types
+#     - Use boxplots to detect shifts or patterns in stock prices
+# ============================================================
+
+
+
+
