@@ -8,7 +8,7 @@
 library(ggplot2)
 
 # Load the data from the URL
-url <- "https://raw.githubusercontent.com/li-lu-DA/DANL101/refs/heads/main/TSLA091925.csv"
+url <- "https://raw.githubusercontent.com/li-lu-DA/DANL101/refs/heads/main/TSLA100126.csv"
 data <- read.csv(url)
 
 # Convert the 'Date'/'Volume' column to Date type with the correct format
